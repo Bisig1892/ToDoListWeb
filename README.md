@@ -10,7 +10,7 @@ ToDo Items
 
 Functionality
 - Delete Item
-- Check =/Uncheck Completed
+- Check/Uncheck Completed
 - Add Item
 - Save all ToDo Items
 - Read all ToDo Items
