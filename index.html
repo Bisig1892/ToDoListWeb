@@ -4,26 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="Description" content="Free online todo list tracker. Manage your todo items free online.">
+    <meta name="Description" content="Free online todo list tracker. Manage todos free online">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <title>Free Online ToDo List</title>
 </head>
 <body>
     <h1>ToDo List</h1>
     <form>
-        <input type="text" placeholder="Title" aria-placeholder="Enter a task to complete" name="title" id="title">
-        <br><br>
-        <input type="text" placeholder="Deadline" aria-placeholder="Enter a date when the task is due" name="deadline" id="deadline">
+        <input type="text" placeholder="title"
+            name="title" id="title">
         <br>
-        <input type="checkbox" name="isComplete" id="isComplete">Completed?
+        <input type="text" placeholder="deadline"
+            aria-placeholder="Enter a date task is due"
+            autocomplete="off"
+            name="deadline" id="deadline">
         <br>
-        <input type="submit" value="Add ToDo" aria-placeholder="submit">
+        <input type="checkbox"> IsComplete?
+        <br>
+        <input type="button" value="Add ToDo">
     </form>
     <div id="todo">
-
+        
     </div>
     <div id="completed">
 
     </div>
-    <script src="/scripts/main.js"></script>
+
+    <script src="scripts/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script>
+        var picker = new Pikaday({ 
+            field: document.getElementById('deadline') 
+        });
+    </script>
 </body>
 </html>
