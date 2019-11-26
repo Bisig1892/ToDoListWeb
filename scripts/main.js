@@ -15,7 +15,12 @@ window.onload = function () {
 function main() {
     var item = getItem();
     displayToDoItem(item);
-    // Save ToDoItem
+    var allItems = readToDoItems();
+    allItems.push(item); //Adds new items to allItems list
+    saveToDoItems(allItems);
+    for (var i = 0; i < allItems.length; i++) {
+        allItems[i].title;
+    }
 }
 /**
  * Move selected task to completed section
@@ -52,4 +57,16 @@ function getItem() {
     item.deadline = new Date(deadline);
     item.isCompleted = false;
     return item;
+}
+var theStorageKey = 'MyItems';
+function saveToDoItems(items) {
+    localStorage.setItem(theStorageKey, JSON.stringify(items));
+}
+function readToDoItems() {
+    var stringData = localStorage.getItem(theStorageKey);
+    if (stringData == null) {
+        return new Array();
+    }
+    var itemArr = JSON.parse(stringData);
+    return itemArr;
 }

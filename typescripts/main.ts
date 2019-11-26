@@ -25,7 +25,13 @@ function main(){
 
     displayToDoItem(item);
 
-    // Save ToDoItem
+    let allItems = readToDoItems();
+    allItems.push(item); //Adds new items to allItems list
+    saveToDoItems(allItems);
+
+    for(let i = 0; i < allItems.length; i++) {
+        allItems[i].title;
+    }
 }
 
 /**
@@ -74,4 +80,21 @@ function getItem():ToDoItem{
     item.isCompleted = false;
 
     return item;
+}
+
+const theStorageKey = 'MyItems';
+
+function saveToDoItems(items:Array<ToDoItem>) {
+    localStorage.setItem(theStorageKey, JSON.stringify(items));
+}
+
+function readToDoItems():Array<ToDoItem> {
+    let stringData = localStorage.getItem(theStorageKey);
+
+    if(stringData == null) {
+         return new Array();
+    }
+    
+    let itemArr:ToDoItem[] = JSON.parse(stringData);
+    return itemArr;
 }
