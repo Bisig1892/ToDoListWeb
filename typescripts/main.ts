@@ -18,6 +18,7 @@ window.onload = function(){
     let addBtn = <HTMLElement>
         document.querySelector("form > input[type=button]");
     addBtn.onclick = main;
+    showAllToDoItems()
 };
 
 function main(){
@@ -25,9 +26,9 @@ function main(){
 
     displayToDoItem(item);
 
-    let allItems = readToDoItems();
+    let allItems = getToDoItems();
     allItems.push(item); //Adds new items to allItems list
-    saveToDoItems(allItems);
+    saveToDoItems(item);
 
     for(let i = 0; i < allItems.length; i++) {
         allItems[i].title;
@@ -38,20 +39,22 @@ function main(){
  * Move selected task to completed section
  * of the web page
  */
-function markAsComplete(){
+function markAsComplete(theStorageKey) {
     let currItem = <HTMLDivElement>this;
 
     let completedItems =
         document.getElementById("completed");
     
     completedItems.appendChild(currItem);
+    Cookies.get(theStorageKey);
+    Cookies.remove(theStorageKey);
 }
 
 /**
  * Displays ToDoItem on the page
  * @param item The item to be displayed
  */
-function displayToDoItem(item:ToDoItem):void{
+function displayToDoItem(item:ToDoItem):void {
     let div = document.createElement("div");
     div.onclick = markAsComplete;
     div.innerHTML = 
@@ -84,17 +87,27 @@ function getItem():ToDoItem{
 
 const theStorageKey = 'MyItems';
 
-function saveToDoItems(items:Array<ToDoItem>) {
-    localStorage.setItem(theStorageKey, JSON.stringify(items));
+function saveToDoItems(i:ToDoItem):void {
+    let items = getToDoItems();
+    let data = JSON.stringify(items)
+    localStorage.setItem(theStorageKey, data);
 }
 
-function readToDoItems():Array<ToDoItem> {
-    let stringData = localStorage.getItem(theStorageKey);
+function getToDoItems():ToDoItem[] {
+    let data = localStorage.getItem(theStorageKey);
 
-    if(stringData == null) {
+    if(data == null) {
          return new Array();
     }
-    
-    let itemArr:ToDoItem[] = JSON.parse(stringData);
-    return itemArr;
+    return <ToDoItem[]>JSON.parse(data);
+}
+
+function showAllToDoItems() {
+    let div = document.getElementById('todo');
+    div.innerHTML = '';
+    let allTodo = getToDoItems();
+    for (let i = 0; i < allTodo.length; i++) {
+        let toDo = allTodo[i];
+        displayToDoItem(toDo);
+    }
 }

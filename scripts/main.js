@@ -11,13 +11,14 @@ var myItem = new ToDoItem("Finish class");
 window.onload = function () {
     var addBtn = document.querySelector("form > input[type=button]");
     addBtn.onclick = main;
+    showAllToDoItems();
 };
 function main() {
     var item = getItem();
     displayToDoItem(item);
-    var allItems = readToDoItems();
+    var allItems = getToDoItems();
     allItems.push(item); //Adds new items to allItems list
-    saveToDoItems(allItems);
+    saveToDoItems(item);
     for (var i = 0; i < allItems.length; i++) {
         allItems[i].title;
     }
@@ -26,10 +27,12 @@ function main() {
  * Move selected task to completed section
  * of the web page
  */
-function markAsComplete() {
+function markAsComplete(theStorageKey) {
     var currItem = this;
     var completedItems = document.getElementById("completed");
     completedItems.appendChild(currItem);
+    Cookies.get(theStorageKey);
+    Cookies.remove(theStorageKey);
 }
 /**
  * Displays ToDoItem on the page
@@ -59,14 +62,24 @@ function getItem() {
     return item;
 }
 var theStorageKey = 'MyItems';
-function saveToDoItems(items) {
-    localStorage.setItem(theStorageKey, JSON.stringify(items));
+function saveToDoItems(i) {
+    var items = getToDoItems();
+    var data = JSON.stringify(items);
+    localStorage.setItem(theStorageKey, data);
 }
-function readToDoItems() {
-    var stringData = localStorage.getItem(theStorageKey);
-    if (stringData == null) {
+function getToDoItems() {
+    var data = localStorage.getItem(theStorageKey);
+    if (data == null) {
         return new Array();
     }
-    var itemArr = JSON.parse(stringData);
-    return itemArr;
+    return JSON.parse(data);
+}
+function showAllToDoItems() {
+    var div = document.getElementById('todo');
+    div.innerHTML = '';
+    var allTodo = getToDoItems();
+    for (var i = 0; i < allTodo.length; i++) {
+        var toDo = allTodo[i];
+        displayToDoItem(toDo);
+    }
 }
