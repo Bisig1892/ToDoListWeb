@@ -16,7 +16,7 @@ let myItem = new ToDoItem("Finish class");
 
 window.onload = function(){
     let addBtn = <HTMLElement>
-        document.querySelector("form > input[type=button]");
+        document.getElementById('submit');
     addBtn.onclick = main;
     showAllToDoItems()
 };
@@ -28,7 +28,7 @@ function main(){
 
     let allItems = getToDoItems();
     allItems.push(item); //Adds new items to allItems list
-    saveToDoItems(item);
+    saveToDoItems(allItems);
 
     for(let i = 0; i < allItems.length; i++) {
         allItems[i].title;
@@ -39,15 +39,13 @@ function main(){
  * Move selected task to completed section
  * of the web page
  */
-function markAsComplete(theStorageKey) {
+function markAsComplete() {
     let currItem = <HTMLDivElement>this;
 
     let completedItems =
         document.getElementById("completed");
     
     completedItems.appendChild(currItem);
-    Cookies.get(theStorageKey);
-    Cookies.remove(theStorageKey);
 }
 
 /**
@@ -60,8 +58,6 @@ function displayToDoItem(item:ToDoItem):void {
     div.innerHTML = 
         '<input type="checkbox">' +
             item.title;
-
-    console.log(div);
     // display new div on page
     let displayDiv = 
         document.getElementById("todo");
@@ -87,15 +83,12 @@ function getItem():ToDoItem{
 
 const theStorageKey = 'MyItems';
 
-function saveToDoItems(i:ToDoItem):void {
-    let items = getToDoItems();
-    let data = JSON.stringify(items)
-    localStorage.setItem(theStorageKey, data);
+function saveToDoItems(items:Array<ToDoItem>) {
+    localStorage.setItem(theStorageKey, JSON.stringify(items));
 }
 
 function getToDoItems():ToDoItem[] {
     let data = localStorage.getItem(theStorageKey);
-
     if(data == null) {
          return new Array();
     }

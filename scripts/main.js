@@ -9,7 +9,7 @@ var ToDoItem = /** @class */ (function () {
 }());
 var myItem = new ToDoItem("Finish class");
 window.onload = function () {
-    var addBtn = document.querySelector("form > input[type=button]");
+    var addBtn = document.getElementById('submit');
     addBtn.onclick = main;
     showAllToDoItems();
 };
@@ -18,7 +18,7 @@ function main() {
     displayToDoItem(item);
     var allItems = getToDoItems();
     allItems.push(item); //Adds new items to allItems list
-    saveToDoItems(item);
+    saveToDoItems(allItems);
     for (var i = 0; i < allItems.length; i++) {
         allItems[i].title;
     }
@@ -27,12 +27,10 @@ function main() {
  * Move selected task to completed section
  * of the web page
  */
-function markAsComplete(theStorageKey) {
+function markAsComplete() {
     var currItem = this;
     var completedItems = document.getElementById("completed");
     completedItems.appendChild(currItem);
-    Cookies.get(theStorageKey);
-    Cookies.remove(theStorageKey);
 }
 /**
  * Displays ToDoItem on the page
@@ -44,7 +42,6 @@ function displayToDoItem(item) {
     div.innerHTML =
         '<input type="checkbox">' +
             item.title;
-    console.log(div);
     // display new div on page
     var displayDiv = document.getElementById("todo");
     displayDiv.appendChild(div);
@@ -62,10 +59,8 @@ function getItem() {
     return item;
 }
 var theStorageKey = 'MyItems';
-function saveToDoItems(i) {
-    var items = getToDoItems();
-    var data = JSON.stringify(items);
-    localStorage.setItem(theStorageKey, data);
+function saveToDoItems(items) {
+    localStorage.setItem(theStorageKey, JSON.stringify(items));
 }
 function getToDoItems() {
     var data = localStorage.getItem(theStorageKey);

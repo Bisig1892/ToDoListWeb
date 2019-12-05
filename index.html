@@ -5,39 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Free online todo list tracker. Manage todos free online">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <title>Free Online ToDo List</title>
 </head>
 <body>
     <h1>ToDo List</h1>
-    <form>
-        <input type="text" placeholder="title"
-            name="title" id="title">
-        <br>
-        <input type="text" placeholder="deadline"
-            aria-placeholder="Enter a date task is due"
-            autocomplete="off"
-            name="deadline" id="deadline">
-        <br>
-        <input type="checkbox"> IsComplete?
-        <br>
-        <input type="button" value="Add ToDo">
-    </form>
-    <div id="todo">
-        
-    </div>
-    <div id="completed">
-
+    <div id="todoForm">
+        <div class="form-group row mx-auto">
+            <div class="col-lg-4 col-med-6 col-sm-6">
+                <input type="text" class="form-control task" placeholder="Title"
+                    name="title" id="title">
+                <input type="text" class="form-control task" placeholder="Deadline" aria-placeholder="Enter a date task is due" autocomplete="off" name="deadline" id="deadline">
+            </div>
+        </div>
+        <div class="form-group row checkComplete">
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checked">
+                    <label for="checked" class="for-check-label">
+                        Has this been completed?
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="for-group row checkComplete submitItem">
+            <div class="col-sm-10">
+                <input class="btn btn-success" id="submit" type="button" value="Add ToDo">
+            </div>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-5">
+            <div class="lists" id="thingsToDo">
+                <h3 class="title">Things To Do...</h3>
+                <div id="todo"></div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class='lists' id="completed">
+                <h3 class="title">Completed</h3>
+                <div id="completed">
+                </div>
+            </div>
+        </div>
     </div>
     <script src="scripts/js.cookie.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="scripts/main.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     <script>
         var picker = new Pikaday({ 
             field: document.getElementById('deadline') 
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

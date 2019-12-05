@@ -1,41 +1,40 @@
-  
-div#todo, div#completed{
-    border-radius: .2em;
-    padding: .3em;
-    box-sizing: border-box;
+body {
+    background-color: darkgray;
+    position: relative;
 }
 
-div#todo{
+h1 {
+    text-align: center;
+    color: rgb(50, 54, 57);
+    margin: 2em;
+}
+.task {
+    margin: 1em;
+}
+
+.title {
+    text-align: center;
+    text-decoration: underline;
+}
+.lists {
     border: 1px solid black;
-    width: 48%;
-    float: left;
-    background-color: lightblue;
-    margin-right: 2%;
+    border-radius: 1em;
+    margin: 0 2em 1em 2em;
+    padding: 1em;
 }
 
-div#completed{
-    float: right;
-    width: 50%;
-    border: 1px solid darkgreen;
-    background-color: lightgray;
-    text-decoration: line-through;
-    opacity: .5;
+.checkComplete {
+    margin: 0 2em;
 }
 
-@media only screen and (max-width: 600px){
-    body{
-        background-color: green;
-    }
-
-    div#todo{
-        float: none;
-        margin-right: 0;
-        width: 100%;
-    }
-
-    div#completed{
-        float: none;
-        width: 100%;
-        margin-top: 1em;
-    }
+.submitItem {
+    margin-bottom: 1em;
 }
+#thingsToDo {
+    background-color: #04869c;
+}
+
+#completed {
+    background-color: #d6bb33 ;
+}
+
